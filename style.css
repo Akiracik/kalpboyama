@@ -1,0 +1,184 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ff6b9d, #c44569, #f8b500);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+}
+
+.heart-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+}
+
+#heartCanvas {
+    cursor: crosshair;
+    background: transparent;
+}
+
+.instruction {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+.love-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 1s ease;
+    z-index: 100;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+}
+
+.love-message.show {
+    opacity: 1;
+    visibility: visible;
+    animation: loveMessageAnimation 3s ease;
+}
+
+@keyframes loveMessageAnimation {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.heart-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+}
+
+.falling-heart {
+    position: absolute;
+    font-size: 20px;
+    color: #ff6b9d;
+    animation: fall linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.heart-shake {
+    animation: heartShake 0.5s infinite;
+}
+
+@keyframes heartShake {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-2px, -2px) rotate(-1deg); }
+    50% { transform: translate(2px, -2px) rotate(1deg); }
+    75% { transform: translate(-2px, 2px) rotate(-1deg); }
+}
+
+.heart-explode {
+    animation: heartExplode 1s ease-out forwards;
+}
+
+@keyframes heartExplode {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.8; }
+    100% { transform: scale(3); opacity: 0; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    #heartCanvas {
+        max-width: 90vw;
+        max-height: 60vh;
+    }
+    
+    .instruction {
+        font-size: 1rem;
+        margin-top: 15px;
+    }
+    
+    .love-message {
+        font-size: 1.5rem;
+        padding: 0 20px;
+    }
+    
+    .falling-heart {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .love-message {
+        font-size: 1.2rem;
+    }
+    
+    .instruction {
+        font-size: 0.9rem;
+    }
+    
+    .falling-heart {
+        font-size: 14px;
+    }
+}
+
+@media (max-height: 600px) {
+    #heartCanvas {
+        max-height: 50vh;
+    }
+    
+    .container {
+        padding: 5px;
+    }
+}
